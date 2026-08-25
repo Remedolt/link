@@ -107,27 +107,6 @@
   .result-link:hover{text-decoration:underline}
   .result-actions{display:flex; gap:8px; flex-shrink:0}
 
-  .disclaimer{
-    max-width:600px; margin:20px auto 0; font-size:12.5px; color:var(--muted-2);
-    text-align:center; line-height:1.6;
-  }
-
-  section.features{border-top:1px solid var(--border); background:var(--bg-plane); padding:88px 0}
-  .features h2{font-size:30px; text-align:center; margin:0 0 10px; letter-spacing:-.01em}
-  .features p.sub{text-align:center; color:var(--muted); max-width:480px; margin:0 auto 56px}
-  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:20px}
-  .feature-card{
-    background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px;
-    transition:border-color .15s;
-  }
-  .feature-card:hover{border-color: rgba(109,124,255,.4)}
-  .feature-icon{
-    width:38px; height:38px; border-radius:9px; background:var(--primary-soft); color:var(--primary);
-    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
-  }
-  .feature-card h3{margin:0 0 6px; font-size:15px; font-weight:600}
-  .feature-card p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.55}
-
   footer{border-top:1px solid var(--border); padding:32px 0}
   .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--muted-2)}
   .footer-row a{text-decoration:none; color:var(--muted-2)}
@@ -218,21 +197,9 @@
         </div>
       </div>
 
-      <p class="disclaimer">
-        Static demo — links are generated and stored only in <em>this browser</em> (no server or database),
-        so they won't resolve on other devices. Want the real thing, with accounts and a dashboard?
-        <a href="https://github.com/remedolt/link" style="color:var(--muted)"><u>See the full source</u></a>.
-      </p>
     </div>
   </section>
 
-  <section class="features">
-    <div class="wrap">
-      <h2>Everything you need from a link</h2>
-      <p class="sub">Built for people who share links a lot — and want to know what happens after the click.</p>
-      <div class="grid" id="featureGrid"></div>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -259,29 +226,6 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
-
-  var QR_ICON = '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="15" y="15" width="2.5" height="2.5" rx="0.5"/><rect x="19" y="15" width="2" height="2" rx="0.5"/><rect x="15" y="19" width="2" height="2" rx="0.5"/><rect x="19" y="19" width="2" height="2" rx="0.5"/>';
-
-  var FEATURES = [
-    { icon:'<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/>', title:'Instant redirects', body:'Links resolve with a fast redirect the moment they\'re clicked.' },
-    { icon:'<path d="M3 3v18h18M7 15l4-4 3 3 5-6"/>', title:'Real-time analytics', body:'Track clicks over time, devices, browsers, and top referrers.' },
-    { icon:'<path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/>', title:'Custom aliases', body:'Brand your links with a memorable alias instead of a random string.' },
-    { icon:QR_ICON, title:'QR codes, built in', body:'Every short link gets a downloadable QR code for print and in person.', fill:true },
-    { icon:'<path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11Z"/>', title:'Expiry & control', body:'Set expiration dates and disable links instantly, any time.' },
-    { icon:'<path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.1L12 16.3 5.7 20.7 8 13.6 2 9.2h7.6z"/>', title:'Clean, readable codes', body:'Auto-generated short codes skip ambiguous characters entirely.' }
-  ];
-  var grid = document.getElementById('featureGrid');
-  FEATURES.forEach(function(f){
-    var el = document.createElement('div');
-    el.className = 'feature-card';
-    var strokeAttrs = f.fill
-      ? 'fill="currentColor" stroke="none"'
-      : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
-    el.innerHTML =
-      '<div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" '+strokeAttrs+'>'+f.icon+'</svg></div>'+
-      '<h3>'+f.title+'</h3><p>'+f.body+'</p>';
-    grid.appendChild(el);
-  });
 
   function toast(msg){
     var t = document.getElementById('toast');
