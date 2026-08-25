@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Snipp — Short links that don't quit</title>
+<meta name="description" content="Shorten long URLs into clean, trackable links in seconds." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%236d7cff%22/><path d=%22M30 55a15 15 0 0 1 15-15h8M70 45a15 15 0 0 1-15 15h-8%22 stroke=%22white%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>" />
+<style>
+  :root{
+    --bg:#0b0b0f; --bg-plane:#08080b; --card:#131318; --card-hover:#17171d;
+    --border: rgba(255,255,255,.10); --border-strong: rgba(255,255,255,.16);
+    --fg:#f5f5f7; --muted:#96969f; --muted-2:#6e6e78;
+    --primary:#6d7cff; --primary-fg:#0b0b0f; --primary-soft: rgba(109,124,255,.12);
+    --success:#3ecf8e; --danger:#f2665e;
+    --radius:14px;
+    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font); background:var(--bg); color:var(--fg);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+  header{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
+    background:rgba(11,11,15,.75); border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:600; font-size:17px; text-decoration:none}
+  .brand .mark{
+    width:32px; height:32px; border-radius:9px; background:var(--primary);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .brand .mark svg{width:16px; height:16px}
+  .nav-actions{display:flex; gap:8px}
+  .btn{
+    appearance:none; border:1px solid transparent; border-radius:9px; padding:9px 16px;
+    font-size:14px; font-weight:500; font-family:inherit; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    transition: background .15s, border-color .15s, transform .1s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{background:var(--primary); color:var(--primary-fg)}
+  .btn-primary:hover{background:#8291ff}
+  .btn-ghost{background:transparent; color:var(--fg); border-color:transparent}
+  .btn-ghost:hover{background:rgba(255,255,255,.06)}
+  .btn-outline{background:transparent; color:var(--fg); border-color:var(--border-strong)}
+  .btn-outline:hover{background:rgba(255,255,255,.06)}
+  .btn-icon{padding:9px; width:38px; height:38px; justify-content:center}
+  .btn:disabled{opacity:.5; cursor:not-allowed}
+
+  .hero{position:relative; overflow:hidden; padding:96px 0 72px; text-align:center}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-1;
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:500;
+    padding:6px 12px; border-radius:999px; background:var(--card); border:1px solid var(--border);
+    color:var(--muted); margin-bottom:28px;
+  }
+  h1{font-size:56px; line-height:1.08; letter-spacing:-.02em; margin:0 0 18px; font-weight:650}
+  h1 .accent{color:var(--primary)}
+  .lede{font-size:18px; color:var(--muted); max-width:560px; margin:0 auto 40px}
+
+  .shortener{
+    max-width:600px; margin:0 auto; border-radius:18px; border:1px solid var(--border);
+    background:rgba(19,19,24,.7); padding:8px; box-shadow:0 20px 60px -20px rgba(0,0,0,.6);
+    text-align:left;
+  }
+  .shortener-row{display:flex; gap:8px; flex-wrap:wrap}
+  .shortener input[type=url]{
+    flex:1; min-width:200px; background:transparent; border:0; color:var(--fg);
+    font-family:inherit; font-size:15px; padding:14px 16px; outline:none;
+  }
+  .shortener input::placeholder{color:var(--muted-2)}
+  .alias-toggle{
+    border-top:1px solid var(--border); padding:10px 14px; font-size:12.5px; color:var(--muted);
+    cursor:pointer; user-select:none; display:flex; align-items:center; gap:6px;
+  }
+  .alias-toggle:hover{color:var(--fg)}
+  .alias-row{display:none; align-items:center; gap:8px; padding:6px 14px 10px}
+  .alias-row.open{display:flex}
+  .alias-row span{font-size:12.5px; color:var(--muted-2); white-space:nowrap}
+  .alias-row input{
+    flex:1; background:rgba(255,255,255,.04); border:1px solid var(--border); border-radius:8px;
+    color:var(--fg); font-family:inherit; font-size:13.5px; padding:8px 10px; outline:none;
+  }
+  .error-msg{color:var(--danger); font-size:13.5px; margin:10px 4px 0; text-align:left}
+
+  .result{
+    max-width:600px; margin:16px auto 0; border:1px solid var(--border); border-radius:14px;
+    background:var(--card); padding:16px 18px; display:none;
+  }
+  .result.show{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+  .result-info{min-width:0}
+  .result-orig{font-size:12px; color:var(--muted-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:340px}
+  .result-link{font-size:17px; font-weight:600; color:var(--primary); text-decoration:none; word-break:break-all}
+  .result-link:hover{text-decoration:underline}
+  .result-actions{display:flex; gap:8px; flex-shrink:0}
+
+  .disclaimer{
+    max-width:600px; margin:20px auto 0; font-size:12.5px; color:var(--muted-2);
+    text-align:center; line-height:1.6;
+  }
+
+  section.features{border-top:1px solid var(--border); background:var(--bg-plane); padding:88px 0}
+  .features h2{font-size:30px; text-align:center; margin:0 0 10px; letter-spacing:-.01em}
+  .features p.sub{text-align:center; color:var(--muted); max-width:480px; margin:0 auto 56px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:20px}
+  .feature-card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px;
+    transition:border-color .15s;
+  }
+  .feature-card:hover{border-color: rgba(109,124,255,.4)}
+  .feature-icon{
+    width:38px; height:38px; border-radius:9px; background:var(--primary-soft); color:var(--primary);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .feature-card h3{margin:0 0 6px; font-size:15px; font-weight:600}
+  .feature-card p{margin:0; font-size:13.5px; color:var(--muted); line-height:1.55}
+
+  footer{border-top:1px solid var(--border); padding:32px 0}
+  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--muted-2)}
+  .footer-row a{text-decoration:none; color:var(--muted-2)}
+  .footer-row a:hover{color:var(--fg)}
+
+  /* Toast */
+  #toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--card); border:1px solid var(--border-strong); color:var(--fg);
+    padding:12px 18px; border-radius:10px; font-size:13.5px; box-shadow:0 10px 30px rgba(0,0,0,.4);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  /* QR modal */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(3px);
+    display:none; align-items:center; justify-content:center; z-index:60; padding:20px;
+  }
+  .modal-overlay.show{display:flex}
+  .modal{background:var(--card); border:1px solid var(--border-strong); border-radius:16px; padding:24px; max-width:320px; width:100%; text-align:center}
+  .modal h3{margin:0 0 6px; font-size:16px}
+  .modal p{margin:0 0 18px; font-size:13px; color:var(--muted)}
+  .modal img{background:#fff; border-radius:10px; padding:14px; width:100%; max-width:220px; margin:0 auto 18px; display:block}
+
+  @media (max-width:640px){
+    h1{font-size:38px}
+    .nav-actions .label{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
+      </span>
+      Snipp
+    </a>
+    <nav class="nav-actions">
+      <button class="btn btn-ghost" onclick="notReady()"><span class="label">Sign in</span></button>
+      <button class="btn btn-primary" onclick="notReady()">Get started</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge">✨ Free short links, no signup required</span>
+      <h1>Shorten links.<br><span class="accent">Track everything.</span></h1>
+      <p class="lede">Paste any URL and get a clean, shareable link in seconds — complete with QR codes and click analytics.</p>
+
+      <form class="shortener" id="shortenForm" onsubmit="return handleShorten(event)">
+        <div class="shortener-row">
+          <input type="url" id="urlInput" placeholder="Paste a long URL — https://example.com/very/long/path" required />
+          <button type="submit" class="btn btn-primary" style="margin:4px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.1L12 16.3 5.7 20.7 8 13.6 2 9.2h7.6z"/></svg>
+            Shorten
+          </button>
+        </div>
+        <div class="alias-toggle" onclick="toggleAlias()">
+          <svg id="aliasChevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform .15s"><path d="M6 9l6 6 6-6"/></svg>
+          Custom alias (optional)
+        </div>
+        <div class="alias-row" id="aliasRow">
+          <span>snipp.link/</span>
+          <input type="text" id="aliasInput" placeholder="my-custom-name" maxlength="30" pattern="[a-zA-Z0-9_-]{3,30}" />
+        </div>
+      </form>
+      <p class="error-msg" id="errorMsg"></p>
+
+      <div class="result" id="resultCard">
+        <div class="result-info">
+          <div class="result-orig" id="resultOrig"></div>
+          <a class="result-link" id="resultLink" target="_blank" rel="noopener"></a>
+        </div>
+        <div class="result-actions">
+          <button class="btn btn-outline btn-icon" onclick="openQr()" title="QR code">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17.5V20"/></svg>
+          </button>
+          <button class="btn btn-primary" onclick="copyResult()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy
+          </button>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        Static demo — links are generated and stored only in <em>this browser</em> (no server or database),
+        so they won't resolve on other devices. Want the real thing, with accounts and a dashboard?
+        <a href="https://github.com/remedolt/link" style="color:var(--muted)"><u>See the full source</u></a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="wrap">
+      <h2>Everything you need from a link</h2>
+      <p class="sub">Built for people who share links a lot — and want to know what happens after the click.</p>
+      <div class="grid" id="featureGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© <span id="year"></span> Snipp. Short links that don't quit.</span>
+    <div style="display:flex; gap:22px">
+      <a href="#">Home</a>
+      <a href="https://github.com/remedolt/link">Source</a>
+      <a href="#" onclick="notReady()">Sign in</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<div class="modal-overlay" id="qrOverlay" onclick="if(event.target===this) closeQr()">
+  <div class="modal">
+    <h3>Scan to open</h3>
+    <p>Anyone can scan this code to be redirected to your link.</p>
+    <img id="qrImg" alt="QR code" />
+    <button class="btn btn-outline" style="width:100%; justify-content:center" onclick="closeQr()">Close</button>
+  </div>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var QR_ICON = '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="15" y="15" width="2.5" height="2.5" rx="0.5"/><rect x="19" y="15" width="2" height="2" rx="0.5"/><rect x="15" y="19" width="2" height="2" rx="0.5"/><rect x="19" y="19" width="2" height="2" rx="0.5"/>';
+
+  var FEATURES = [
+    { icon:'<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/>', title:'Instant redirects', body:'Links resolve with a fast redirect the moment they\'re clicked.' },
+    { icon:'<path d="M3 3v18h18M7 15l4-4 3 3 5-6"/>', title:'Real-time analytics', body:'Track clicks over time, devices, browsers, and top referrers.' },
+    { icon:'<path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/>', title:'Custom aliases', body:'Brand your links with a memorable alias instead of a random string.' },
+    { icon:QR_ICON, title:'QR codes, built in', body:'Every short link gets a downloadable QR code for print and in person.', fill:true },
+    { icon:'<path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11Z"/>', title:'Expiry & control', body:'Set expiration dates and disable links instantly, any time.' },
+    { icon:'<path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.1L12 16.3 5.7 20.7 8 13.6 2 9.2h7.6z"/>', title:'Clean, readable codes', body:'Auto-generated short codes skip ambiguous characters entirely.' }
+  ];
+  var grid = document.getElementById('featureGrid');
+  FEATURES.forEach(function(f){
+    var el = document.createElement('div');
+    el.className = 'feature-card';
+    var strokeAttrs = f.fill
+      ? 'fill="currentColor" stroke="none"'
+      : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+    el.innerHTML =
+      '<div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" '+strokeAttrs+'>'+f.icon+'</svg></div>'+
+      '<h3>'+f.title+'</h3><p>'+f.body+'</p>';
+    grid.appendChild(el);
+  });
+
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+  function notReady(){ toast("Accounts aren't wired up in this static demo — see the source for the full app."); }
+
+  function toggleAlias(){
+    var row = document.getElementById('aliasRow');
+    var chev = document.getElementById('aliasChevron');
+    row.classList.toggle('open');
+    chev.style.transform = row.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+
+  function isValidUrl(v){
+    try{
+      var u = new URL(v);
+      return (u.protocol === 'http:' || u.protocol === 'https:') && u.hostname.includes('.');
+    }catch(e){ return false; }
+  }
+
+  function getStore(){
+    try{ return JSON.parse(localStorage.getItem('snipp_links') || '{}'); }catch(e){ return {}; }
+  }
+  function setStore(store){
+    localStorage.setItem('snipp_links', JSON.stringify(store));
+  }
+  function randomCode(){
+    var alphabet = '23456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+    var out = '';
+    for(var i=0;i<6;i++) out += alphabet[Math.floor(Math.random()*alphabet.length)];
+    return out;
+  }
+
+  var lastResultUrl = '';
+
+  function handleShorten(e){
+    e.preventDefault();
+    var errorEl = document.getElementById('errorMsg');
+    errorEl.textContent = '';
+
+    var url = document.getElementById('urlInput').value.trim();
+    var alias = document.getElementById('aliasInput').value.trim();
+
+    if(!isValidUrl(url)){
+      errorEl.textContent = 'Enter a valid http(s) URL, e.g. https://example.com';
+      return false;
+    }
+    if(alias && !/^[a-zA-Z0-9_-]{3,30}$/.test(alias)){
+      errorEl.textContent = 'Alias must be 3-30 characters: letters, numbers, - and _ only';
+      return false;
+    }
+
+    var store = getStore();
+    var code = alias || randomCode();
+    while(!alias && store[code]) code = randomCode();
+    if(alias && store[code]){
+      errorEl.textContent = 'That alias is already taken in this browser — pick another.';
+      return false;
+    }
+
+    store[code] = { url: url, createdAt: Date.now() };
+    setStore(store);
+
+    var shortUrl = location.origin + location.pathname.replace(/\/?$/, '/') + '#/' + code;
+    lastResultUrl = shortUrl;
+
+    document.getElementById('resultOrig').textContent = url;
+    var link = document.getElementById('resultLink');
+    link.href = shortUrl;
+    link.textContent = shortUrl.replace(/^https?:\/\//, '');
+    document.getElementById('resultCard').classList.add('show');
+
+    document.getElementById('urlInput').value = '';
+    document.getElementById('aliasInput').value = '';
+    toast('Short link created');
+    return false;
+  }
+
+  function copyResult(){
+    navigator.clipboard.writeText(lastResultUrl).then(function(){
+      toast('Copied to clipboard');
+    }).catch(function(){
+      toast("Couldn't copy — copy it manually");
+    });
+  }
+
+  function openQr(){
+    var img = document.getElementById('qrImg');
+    img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(lastResultUrl);
+    document.getElementById('qrOverlay').classList.add('show');
+  }
+  function closeQr(){
+    document.getElementById('qrOverlay').classList.remove('show');
+  }
+
+  // Client-side "redirect": if we're loaded with a #/CODE hash, look it up
+  // and forward the browser — this only works for links created in this
+  // same browser (localStorage is per-origin, per-device).
+  (function resolveHashRedirect(){
+    var m = location.hash.match(/^#\/(.+)$/);
+    if(!m) return;
+    var store = getStore();
+    var entry = store[m[1]];
+    if(entry && entry.url){
+      location.replace(entry.url);
+    }
+  })();
+</script>
+
+</body>
+</html>
