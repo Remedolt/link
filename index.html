@@ -109,7 +109,7 @@
   .result-link:hover{text-decoration:underline}
   .result-actions{display:flex; gap:8px; flex-shrink:0}
 
-  /* Toast */
+  /* Bildirim */
   #toast{
     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
     background:var(--card); border:1px solid var(--border-strong); color:var(--fg);
@@ -118,7 +118,7 @@
   }
   #toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 
-  /* QR modal */
+  /* QR modalı */
   .modal-overlay{
     position:fixed; inset:0; background:rgba(0,0,0,.6); backdrop-filter:blur(3px);
     display:none; align-items:center; justify-content:center; z-index:60; padding:20px;
@@ -228,10 +228,10 @@
   }
 
   function getStore(){
-    try{ return JSON.parse(localStorage.getItem('snipp_links') || '{}'); }catch(e){ return {}; }
+    try{ return JSON.parse(localStorage.getItem('kisalink_linkler') || '{}'); }catch(e){ return {}; }
   }
   function setStore(store){
-    localStorage.setItem('snipp_links', JSON.stringify(store));
+    localStorage.setItem('kisalink_linkler', JSON.stringify(store));
   }
   function randomCode(){
     var alphabet = '23456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -302,9 +302,9 @@
     document.getElementById('qrOverlay').classList.remove('show');
   }
 
-  // Client-side "redirect": if we're loaded with a #/CODE hash, look it up
-  // and forward the browser — this only works for links created in this
-  // same browser (localStorage is per-origin, per-device).
+  // İstemci taraflı "yönlendirme": sayfa bir #/KOD hash'iyle açıldıysa,
+  // bu kodu bulup tarayıcıyı hedefe yönlendirir — sadece bu tarayıcıda
+  // oluşturulan linkler için çalışır (localStorage her cihaz/tarayıcıya özeldir).
   (function resolveHashRedirect(){
     var m = location.hash.match(/^#\/(.+)$/);
     if(!m) return;
