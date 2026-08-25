@@ -1,10 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Snipp — Short links that don't quit</title>
-<meta name="description" content="Shorten long URLs into clean, trackable links in seconds." />
+<title>Kısa Link — Bitmeyen kısa linkler</title>
+<meta name="description" content="Uzun URL'leri saniyeler içinde temiz, takip edilebilir kısa linklere dönüştürün." />
+<link rel="canonical" href="https://kisalink.space/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kısa Link — Bitmeyen kısa linkler" />
+<meta property="og:description" content="Uzun URL'leri saniyeler içinde temiz, takip edilebilir kısa linklere dönüştürün." />
+<meta property="og:url" content="https://kisalink.space/" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%236d7cff%22/><path d=%22M30 55a15 15 0 0 1 15-15h8M70 45a15 15 0 0 1-15 15h-8%22 stroke=%22white%22 stroke-width=%228%22 fill=%22none%22 stroke-linecap=%22round%22/></svg>" />
 <style>
   :root{
@@ -35,7 +40,6 @@
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
   }
   .brand .mark svg{width:16px; height:16px}
-  .nav-actions{display:flex; gap:8px}
   .btn{
     appearance:none; border:1px solid transparent; border-radius:9px; padding:9px 16px;
     font-size:14px; font-weight:500; font-family:inherit; cursor:pointer;
@@ -45,8 +49,6 @@
   .btn:active{transform:scale(.97)}
   .btn-primary{background:var(--primary); color:var(--primary-fg)}
   .btn-primary:hover{background:#8291ff}
-  .btn-ghost{background:transparent; color:var(--fg); border-color:transparent}
-  .btn-ghost:hover{background:rgba(255,255,255,.06)}
   .btn-outline{background:transparent; color:var(--fg); border-color:var(--border-strong)}
   .btn-outline:hover{background:rgba(255,255,255,.06)}
   .btn-icon{padding:9px; width:38px; height:38px; justify-content:center}
@@ -107,11 +109,6 @@
   .result-link:hover{text-decoration:underline}
   .result-actions{display:flex; gap:8px; flex-shrink:0}
 
-  footer{border-top:1px solid var(--border); padding:32px 0}
-  .footer-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--muted-2)}
-  .footer-row a{text-decoration:none; color:var(--muted-2)}
-  .footer-row a:hover{color:var(--fg)}
-
   /* Toast */
   #toast{
     position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
@@ -134,7 +131,6 @@
 
   @media (max-width:640px){
     h1{font-size:38px}
-    .nav-actions .label{display:none}
   }
 </style>
 </head>
@@ -146,37 +142,33 @@
       <span class="mark">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
       </span>
-      Snipp
+      Kısa Link
     </a>
-    <nav class="nav-actions">
-      <button class="btn btn-ghost" onclick="notReady()"><span class="label">Sign in</span></button>
-      <button class="btn btn-primary" onclick="notReady()">Get started</button>
-    </nav>
   </div>
 </header>
 
 <main>
   <section class="hero">
     <div class="wrap">
-      <span class="badge">✨ Free short links, no signup required</span>
-      <h1>Shorten links.<br><span class="accent">Track everything.</span></h1>
-      <p class="lede">Paste any URL and get a clean, shareable link in seconds — complete with QR codes and click analytics.</p>
+      <span class="badge">✨ Ücretsiz kısa linkler, üyelik gerekmez</span>
+      <h1>Linkleri kısalt.<br><span class="accent">Her şeyi takip et.</span></h1>
+      <p class="lede">Herhangi bir URL'yi yapıştır, saniyeler içinde temiz, paylaşılabilir bir link al — QR kodu ve tıklama analizleriyle birlikte.</p>
 
       <form class="shortener" id="shortenForm" onsubmit="return handleShorten(event)">
         <div class="shortener-row">
-          <input type="url" id="urlInput" placeholder="Paste a long URL — https://example.com/very/long/path" required />
+          <input type="url" id="urlInput" placeholder="Uzun bir URL yapıştırın — https://ornek.com/cok/uzun/bir/yol" required />
           <button type="submit" class="btn btn-primary" style="margin:4px">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l2.4 7.2H22l-6 4.4 2.3 7.1L12 16.3 5.7 20.7 8 13.6 2 9.2h7.6z"/></svg>
-            Shorten
+            Kısalt
           </button>
         </div>
         <div class="alias-toggle" onclick="toggleAlias()">
           <svg id="aliasChevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform .15s"><path d="M6 9l6 6 6-6"/></svg>
-          Custom alias (optional)
+          Özel takma ad (isteğe bağlı)
         </div>
         <div class="alias-row" id="aliasRow">
-          <span>snipp.link/</span>
-          <input type="text" id="aliasInput" placeholder="my-custom-name" maxlength="30" pattern="[a-zA-Z0-9_-]{3,30}" />
+          <span>kisalink.space/</span>
+          <input type="text" id="aliasInput" placeholder="ozel-adim" maxlength="30" pattern="[a-zA-Z0-9_-]{3,30}" />
         </div>
       </form>
       <p class="error-msg" id="errorMsg"></p>
@@ -187,12 +179,12 @@
           <a class="result-link" id="resultLink" target="_blank" rel="noopener"></a>
         </div>
         <div class="result-actions">
-          <button class="btn btn-outline btn-icon" onclick="openQr()" title="QR code">
+          <button class="btn btn-outline btn-icon" onclick="openQr()" title="QR kodu">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17.5V20"/></svg>
           </button>
           <button class="btn btn-primary" onclick="copyResult()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy
+            Kopyala
           </button>
         </div>
       </div>
@@ -202,31 +194,18 @@
 
 </main>
 
-<footer>
-  <div class="wrap footer-row">
-    <span>© <span id="year"></span> Snipp. Short links that don't quit.</span>
-    <div style="display:flex; gap:22px">
-      <a href="#">Home</a>
-      <a href="https://github.com/remedolt/link">Source</a>
-      <a href="#" onclick="notReady()">Sign in</a>
-    </div>
-  </div>
-</footer>
-
 <div id="toast"></div>
 
 <div class="modal-overlay" id="qrOverlay" onclick="if(event.target===this) closeQr()">
   <div class="modal">
-    <h3>Scan to open</h3>
-    <p>Anyone can scan this code to be redirected to your link.</p>
-    <img id="qrImg" alt="QR code" />
-    <button class="btn btn-outline" style="width:100%; justify-content:center" onclick="closeQr()">Close</button>
+    <h3>Açmak için tarat</h3>
+    <p>Herkes bu kodu tarayarak linkinize yönlendirilebilir.</p>
+    <img id="qrImg" alt="QR kodu" />
+    <button class="btn btn-outline" style="width:100%; justify-content:center" onclick="closeQr()">Kapat</button>
   </div>
 </div>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
   function toast(msg){
     var t = document.getElementById('toast');
     t.textContent = msg;
@@ -234,8 +213,6 @@
     clearTimeout(t._timer);
     t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
   }
-  function notReady(){ toast("Accounts aren't wired up in this static demo — see the source for the full app."); }
-
   function toggleAlias(){
     var row = document.getElementById('aliasRow');
     var chev = document.getElementById('aliasChevron');
@@ -274,11 +251,11 @@
     var alias = document.getElementById('aliasInput').value.trim();
 
     if(!isValidUrl(url)){
-      errorEl.textContent = 'Enter a valid http(s) URL, e.g. https://example.com';
+      errorEl.textContent = 'Geçerli bir http(s) URL girin, örn. https://ornek.com';
       return false;
     }
     if(alias && !/^[a-zA-Z0-9_-]{3,30}$/.test(alias)){
-      errorEl.textContent = 'Alias must be 3-30 characters: letters, numbers, - and _ only';
+      errorEl.textContent = 'Takma ad 3-30 karakter olmalı: yalnızca harf, rakam, - ve _';
       return false;
     }
 
@@ -286,7 +263,7 @@
     var code = alias || randomCode();
     while(!alias && store[code]) code = randomCode();
     if(alias && store[code]){
-      errorEl.textContent = 'That alias is already taken in this browser — pick another.';
+      errorEl.textContent = 'Bu takma ad bu tarayıcıda zaten kullanılıyor — başka bir tane seçin.';
       return false;
     }
 
@@ -304,15 +281,15 @@
 
     document.getElementById('urlInput').value = '';
     document.getElementById('aliasInput').value = '';
-    toast('Short link created');
+    toast('Kısa link oluşturuldu');
     return false;
   }
 
   function copyResult(){
     navigator.clipboard.writeText(lastResultUrl).then(function(){
-      toast('Copied to clipboard');
+      toast('Panoya kopyalandı');
     }).catch(function(){
-      toast("Couldn't copy — copy it manually");
+      toast("Kopyalanamadı — elle kopyalayın");
     });
   }
 
