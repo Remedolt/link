@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rastgele Parola Oluşturucu — Kısa Link</title>
+<meta name="description" content="Güçlü ve güvenli rastgele parolalar oluşturun. Uzunluk ve karakter türünü seçin, tek tıkla kopyalayın — tamamen tarayıcınızda, ücretsiz." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Kısa Link" />
+<link rel="canonical" href="https://kisalink.space/parola.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kısa Link" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:title" content="Rastgele Parola Oluşturucu — Kısa Link" />
+<meta property="og:description" content="Güçlü ve güvenli rastgele parolalar oluşturun. Uzunluk ve karakter türünü seçin, tek tıkla kopyalayın — tamamen tarayıcınızda, ücretsiz." />
+<meta property="og:url" content="https://kisalink.space/parola.html" />
+<meta property="og:image" content="https://kisalink.space/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Kısa Link — Ücretsiz rastgele parola oluşturucu" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rastgele Parola Oluşturucu — Kısa Link" />
+<meta name="twitter:description" content="Güçlü ve güvenli rastgele parolalar oluşturun. Uzunluk ve karakter türünü seçin, tek tıkla kopyalayın — tamamen tarayıcınızda, ücretsiz." />
+<meta name="twitter:image" content="https://kisalink.space/og-image.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%236d7cff%22/><stop offset=%221%22 stop-color=%22%239c7cff%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><g transform=%22translate(14,14) scale(3)%22 stroke=%22white%22 stroke-width=%223%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2%22/></g></svg>" />
+<meta name="theme-color" content="#6d7cff" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Rastgele Parola Oluşturucu",
+  "url": "https://kisalink.space/parola.html",
+  "description": "Uzunluk ve karakter türü seçerek güçlü, güvenli rastgele parolalar oluşturan ücretsiz araç.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Tüm cihazlar",
+  "inLanguage": "tr",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "TRY"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0b0f; --bg-plane:#08080b; --card:#131318; --card-hover:#17171d;
+    --border: rgba(255,255,255,.10); --border-strong: rgba(255,255,255,.18);
+    --fg:#f5f5f7; --muted:#96969f; --muted-2:#6e6e78;
+    --primary:#6d7cff; --primary-2:#9c7cff; --primary-fg:#0b0b0f; --primary-soft: rgba(109,124,255,.12);
+    --success:#3ecf8e; --danger:#f2665e; --warning:#f2b134;
+    --radius:14px;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-display: "Sora", var(--font);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font); background:var(--bg); color:var(--fg);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+  header{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(11,11,15,.7); border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 0; position:relative}
+  .nav-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .nav-toggle{
+    display:none; background:rgba(255,255,255,.02); border:1px solid var(--border-strong); border-radius:10px;
+    width:38px; height:38px; align-items:center; justify-content:center; color:var(--fg); cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle:hover{background:rgba(255,255,255,.07)}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; text-decoration:none; font-family:var(--font-display)}
+  .brand .mark{
+    width:32px; height:32px; border-radius:9px;
+    background:linear-gradient(135deg, var(--primary), var(--primary-2));
+    box-shadow:0 4px 16px -4px rgba(109,124,255,.7);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .brand .mark svg{width:24px; height:24px}
+  .btn{
+    appearance:none; border:1px solid transparent; border-radius:999px; padding:10px 18px;
+    font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    transition: background .15s, border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--primary), var(--primary-2)); color:#fff;
+    box-shadow:0 8px 24px -10px rgba(109,124,255,.75);
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 28px -8px rgba(109,124,255,.85)}
+  .btn-outline{background:rgba(255,255,255,.02); color:var(--fg); border-color:var(--border-strong)}
+  .btn-outline:hover{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.28)}
+  .btn:disabled{opacity:.5; cursor:not-allowed}
+
+  .hero{position:relative; overflow:hidden; padding:100px 0 76px; text-align:center}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-2;
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+  }
+  .glow{position:absolute; z-index:-1; border-radius:50%; filter:blur(90px); pointer-events:none}
+  .glow-a{width:420px; height:420px; top:-160px; left:50%; margin-left:-560px; background:rgba(109,124,255,.35)}
+  .glow-b{width:360px; height:360px; top:-120px; left:50%; margin-left:180px; background:rgba(156,124,255,.30)}
+
+  .fade-up{opacity:0; transform:translateY(14px); animation:fadeUp .6s ease forwards}
+  @keyframes fadeUp{to{opacity:1; transform:none}}
+
+  .badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:500;
+    padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.03); border:1px solid var(--border);
+    color:var(--muted); margin-bottom:28px;
+  }
+  .badge .dot{width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px rgba(62,207,142,.18)}
+  h1{
+    font-family:var(--font-display); font-size:50px; line-height:1.1; letter-spacing:-.02em;
+    margin:0 0 18px; font-weight:750; animation-delay:.07s;
+  }
+  h1 .accent{
+    background:linear-gradient(100deg, var(--primary) 10%, var(--primary-2) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lede{font-size:18px; color:var(--muted); max-width:560px; margin:0 auto 40px; animation-delay:.14s}
+
+  .panel{
+    max-width:520px; margin:0 auto; border-radius:20px; border:1px solid var(--border-strong);
+    background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 40%), rgba(17,17,22,.75);
+    backdrop-filter:blur(20px);
+    padding:22px; box-shadow:0 24px 70px -24px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.02) inset;
+    text-align:left; animation-delay:.2s;
+  }
+  label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px; font-weight:500}
+  .field{margin-bottom:18px}
+  .field-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
+  .field-head label{margin-bottom:0}
+  .length-value{font-size:13px; color:var(--fg); font-weight:600}
+  input[type=range]{width:100%; accent-color:var(--primary); cursor:pointer}
+  .check-grid{display:grid; grid-template-columns:1fr 1fr; gap:11px}
+  .check-opt{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--fg); cursor:pointer; user-select:none}
+  .check-opt input{accent-color:var(--primary); width:16px; height:16px; cursor:pointer; flex-shrink:0}
+  .error-msg{color:var(--danger); font-size:13.5px; margin:2px 2px 12px; text-align:left}
+
+  .result{
+    max-width:520px; margin:20px auto 0; border:1px solid var(--border-strong); border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 40%), var(--card);
+    padding:22px; display:none; text-align:center; opacity:0;
+  }
+  .result.show{display:block; animation:fadeUp .35s ease forwards}
+  .pw-display{
+    font-family:ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size:19px; font-weight:600;
+    background:rgba(255,255,255,.045); border:1px solid var(--border); border-radius:10px;
+    padding:16px; word-break:break-all; margin-bottom:16px; letter-spacing:.02em;
+  }
+  .strength-row{display:flex; align-items:center; gap:10px; margin-bottom:18px}
+  .strength-bar{flex:1; height:6px; border-radius:999px; background:rgba(255,255,255,.08); overflow:hidden}
+  .strength-fill{height:100%; width:0%; border-radius:999px; transition:width .3s, background .3s}
+  .strength-label{font-size:12.5px; font-weight:600; white-space:nowrap}
+  .result-actions{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--border); padding:28px 0}
+  .footer-row{text-align:center; font-size:13px; color:var(--muted-2)}
+  .footer-row a{text-decoration:none; color:var(--muted-2)}
+  .footer-row a:hover{color:var(--fg)}
+
+  #toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--card); border:1px solid var(--border-strong); color:var(--fg);
+    padding:12px 18px; border-radius:10px; font-size:13.5px; box-shadow:0 10px 30px rgba(0,0,0,.4);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    h1{font-size:34px}
+    .glow-a, .glow-b{display:none}
+    .check-grid{grid-template-columns:1fr}
+    .nav-toggle{display:flex}
+    .nav-links{
+      display:none; position:absolute; top:calc(100% + 1px); left:0; right:0; flex-direction:column; align-items:stretch;
+      gap:8px; padding:14px 20px 18px; background:rgba(11,11,15,.97); border-bottom:1px solid var(--border);
+      backdrop-filter:blur(14px); border-radius:0 0 14px 14px; box-shadow:0 16px 40px -12px rgba(0,0,0,.6);
+    }
+    .nav-links.open{display:flex}
+    .nav-links .btn{width:100%; justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.9" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
+      </span>
+      Kısa Link
+    </a>
+    <button type="button" class="nav-toggle" onclick="toggleNav()" aria-label="Menüyü aç/kapat">
+      <svg id="navToggleIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
+        Link Kısalt
+      </a>
+      <a href="qr.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17.5V20"/></svg>
+        QR Kod Oluşturucu
+      </a>
+      <a href="gorsel.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+        Görsel Dönüştürücü
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="wrap">
+      <span class="badge fade-up"><span class="dot"></span> Ücretsiz, üyelik gerekmez</span>
+      <h1 class="fade-up">Parola <span class="accent">Oluştur.</span></h1>
+      <p class="lede fade-up">Uzunluğu ve karakter türünü seç, güçlü bir rastgele parola anında oluşsun.</p>
+
+      <form class="panel fade-up" id="pwForm" onsubmit="return handleGenerate(event)" novalidate>
+        <div class="field">
+          <div class="field-head">
+            <label for="lengthSlider">Parola uzunluğu</label>
+            <span class="length-value" id="lengthValue">16</span>
+          </div>
+          <input type="range" id="lengthSlider" min="4" max="64" value="16" />
+        </div>
+        <div class="field">
+          <label>Karakter türleri</label>
+          <div class="check-grid">
+            <label class="check-opt"><input type="checkbox" id="optUpper" checked /> Büyük harf (A-Z)</label>
+            <label class="check-opt"><input type="checkbox" id="optLower" checked /> Küçük harf (a-z)</label>
+            <label class="check-opt"><input type="checkbox" id="optDigits" checked /> Rakam (0-9)</label>
+            <label class="check-opt"><input type="checkbox" id="optSymbols" /> Sembol (!@#$%)</label>
+          </div>
+        </div>
+        <p class="error-msg" id="errorMsg"></p>
+        <button type="submit" class="btn btn-primary" id="pwBtn" style="width:100%; justify-content:center">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          <span id="pwBtnLabel">Parola Oluştur</span>
+        </button>
+      </form>
+
+      <div class="result" id="resultCard">
+        <div class="pw-display" id="pwDisplay"></div>
+        <div class="strength-row">
+          <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+          <span class="strength-label" id="strengthLabel"></span>
+        </div>
+        <div class="result-actions">
+          <button class="btn btn-primary" onclick="copyPassword()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Kopyala
+          </button>
+          <button class="btn btn-outline" onclick="regeneratePassword()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Yeniden Oluştur
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    Parolalar tarayıcınızda oluşturulur, hiçbir yere gönderilmez veya saklanmaz.
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  function toggleNav(){
+    var links = document.getElementById('navLinks');
+    var icon = document.getElementById('navToggleIcon');
+    var isOpen = links.classList.toggle('open');
+    icon.innerHTML = isOpen ? '<path d="M18 6 6 18M6 6l12 12"/>' : '<path d="M3 6h18M3 12h18M3 18h18"/>';
+  }
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 640){
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('navToggleIcon').innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"/>';
+    }
+  });
+
+  var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+  var DIGITS = '0123456789';
+  var SYMBOLS = '!@#$%^&*()-_=+[]{}<>?';
+
+  var lengthSlider = document.getElementById('lengthSlider');
+  var lengthValue = document.getElementById('lengthValue');
+  lengthSlider.addEventListener('input', function(){
+    lengthValue.textContent = lengthSlider.value;
+  });
+
+  function secureRandomInt(max){
+    var range = Math.floor(4294967296 / max) * max;
+    var buf = new Uint32Array(1);
+    var val;
+    do{
+      crypto.getRandomValues(buf);
+      val = buf[0];
+    }while(val >= range);
+    return val % max;
+  }
+
+  function shuffle(arr){
+    for(var i = arr.length - 1; i > 0; i--){
+      var j = secureRandomInt(i + 1);
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function generatePassword(length, sets){
+    var all = sets.join('');
+    var chars = sets.map(function(set){ return set[secureRandomInt(set.length)]; });
+    while(chars.length < length){
+      chars.push(all[secureRandomInt(all.length)]);
+    }
+    return shuffle(chars).slice(0, length).join('');
+  }
+
+  function selectedSets(){
+    var sets = [];
+    if(document.getElementById('optUpper').checked) sets.push(UPPER);
+    if(document.getElementById('optLower').checked) sets.push(LOWER);
+    if(document.getElementById('optDigits').checked) sets.push(DIGITS);
+    if(document.getElementById('optSymbols').checked) sets.push(SYMBOLS);
+    return sets;
+  }
+
+  function updateStrength(length, sets){
+    var pool = sets.join('').length;
+    var bits = pool > 0 ? Math.floor(length * (Math.log(pool) / Math.log(2))) : 0;
+    var fill = document.getElementById('strengthFill');
+    var label = document.getElementById('strengthLabel');
+    var pct, color, text;
+    if(bits < 40){ pct = 25; color = 'var(--danger)'; text = 'Zayıf'; }
+    else if(bits < 60){ pct = 50; color = 'var(--warning)'; text = 'Orta'; }
+    else if(bits < 80){ pct = 75; color = 'var(--primary)'; text = 'Güçlü'; }
+    else{ pct = 100; color = 'var(--success)'; text = 'Çok Güçlü'; }
+    fill.style.width = pct + '%';
+    fill.style.background = color;
+    label.style.color = color;
+    label.textContent = text;
+  }
+
+  var currentPassword = '';
+
+  function handleGenerate(e){
+    if(e) e.preventDefault();
+    var errorEl = document.getElementById('errorMsg');
+    errorEl.textContent = '';
+
+    var sets = selectedSets();
+    if(sets.length === 0){
+      errorEl.textContent = 'Lütfen en az bir karakter türü seçin.';
+      return false;
+    }
+
+    var length = parseInt(lengthSlider.value, 10);
+    if(length < sets.length){
+      length = sets.length;
+      lengthSlider.value = length;
+      lengthValue.textContent = length;
+    }
+
+    currentPassword = generatePassword(length, sets);
+    document.getElementById('pwDisplay').textContent = currentPassword;
+    updateStrength(length, sets);
+    document.getElementById('resultCard').classList.add('show');
+    toast('Parola oluşturuldu');
+    return false;
+  }
+
+  function regeneratePassword(){
+    handleGenerate(null);
+  }
+
+  function copyPassword(){
+    if(!currentPassword) return;
+    navigator.clipboard.writeText(currentPassword).then(function(){
+      toast('Parola kopyalandı');
+    }).catch(function(){
+      toast('Kopyalanamadı — elle kopyalayın');
+    });
+  }
+</script>
+
+</body>
+</html>

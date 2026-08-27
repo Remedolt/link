@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Görsel Boyutlandırıcı ve WebP Dönüştürücü — Kısa Link</title>
+<meta name="description" content="Görsellerinizi tarayıcınızda yeniden boyutlandırın, WebP, JPEG veya PNG formatına dönüştürün. Ücretsiz, hızlı, sunucuya yükleme yok." />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Kısa Link" />
+<link rel="canonical" href="https://kisalink.space/gorsel.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kısa Link" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:title" content="Görsel Boyutlandırıcı ve WebP Dönüştürücü — Kısa Link" />
+<meta property="og:description" content="Görsellerinizi tarayıcınızda yeniden boyutlandırın, WebP, JPEG veya PNG formatına dönüştürün. Ücretsiz, hızlı, sunucuya yükleme yok." />
+<meta property="og:url" content="https://kisalink.space/gorsel.html" />
+<meta property="og:image" content="https://kisalink.space/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Kısa Link — Ücretsiz görsel boyutlandırıcı ve WebP dönüştürücü" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Görsel Boyutlandırıcı ve WebP Dönüştürücü — Kısa Link" />
+<meta name="twitter:description" content="Görsellerinizi tarayıcınızda yeniden boyutlandırın, WebP, JPEG veya PNG formatına dönüştürün. Ücretsiz, hızlı, sunucuya yükleme yok." />
+<meta name="twitter:image" content="https://kisalink.space/og-image.png" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%236d7cff%22/><stop offset=%221%22 stop-color=%22%239c7cff%22/></linearGradient></defs><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22url(%23g)%22/><g transform=%22translate(14,14) scale(3)%22 stroke=%22white%22 stroke-width=%223%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2%22/></g></svg>" />
+<meta name="theme-color" content="#6d7cff" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Görsel Boyutlandırıcı ve WebP Dönüştürücü",
+  "url": "https://kisalink.space/gorsel.html",
+  "description": "Görselleri tarayıcıda yeniden boyutlandıran ve WebP, JPEG veya PNG formatına dönüştüren, sunucuya yükleme gerektirmeyen ücretsiz araç.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Tüm cihazlar",
+  "inLanguage": "tr",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "TRY"
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0b0b0f; --bg-plane:#08080b; --card:#131318; --card-hover:#17171d;
+    --border: rgba(255,255,255,.10); --border-strong: rgba(255,255,255,.18);
+    --fg:#f5f5f7; --muted:#96969f; --muted-2:#6e6e78;
+    --primary:#6d7cff; --primary-2:#9c7cff; --primary-fg:#0b0b0f; --primary-soft: rgba(109,124,255,.12);
+    --success:#3ecf8e; --danger:#f2665e;
+    --radius:14px;
+    --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-display: "Sora", var(--font);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--font); background:var(--bg); color:var(--fg);
+    -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  a{color:inherit}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 24px}
+  header{
+    position:sticky; top:0; z-index:20; backdrop-filter:blur(14px) saturate(140%);
+    background:rgba(11,11,15,.7); border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:13px 0; position:relative}
+  .nav-links{display:flex; align-items:center; gap:8px; flex-wrap:wrap}
+  .nav-toggle{
+    display:none; background:rgba(255,255,255,.02); border:1px solid var(--border-strong); border-radius:10px;
+    width:38px; height:38px; align-items:center; justify-content:center; color:var(--fg); cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle:hover{background:rgba(255,255,255,.07)}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; text-decoration:none; font-family:var(--font-display)}
+  .brand .mark{
+    width:32px; height:32px; border-radius:9px;
+    background:linear-gradient(135deg, var(--primary), var(--primary-2));
+    box-shadow:0 4px 16px -4px rgba(109,124,255,.7);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .brand .mark svg{width:24px; height:24px}
+  .btn{
+    appearance:none; border:1px solid transparent; border-radius:999px; padding:10px 18px;
+    font-size:14px; font-weight:600; font-family:inherit; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    transition: background .15s, border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--primary), var(--primary-2)); color:#fff;
+    box-shadow:0 8px 24px -10px rgba(109,124,255,.75);
+  }
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 12px 28px -8px rgba(109,124,255,.85)}
+  .btn-outline{background:rgba(255,255,255,.02); color:var(--fg); border-color:var(--border-strong)}
+  .btn-outline:hover{background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.28)}
+  .btn:disabled{opacity:.5; cursor:not-allowed}
+  .btn-block{width:100%; justify-content:center}
+
+  .hero{position:relative; overflow:hidden; padding:100px 0 76px; text-align:center}
+  .hero::before{
+    content:""; position:absolute; inset:0; z-index:-2;
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size:56px 56px;
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 0%, black, transparent);
+  }
+  .glow{position:absolute; z-index:-1; border-radius:50%; filter:blur(90px); pointer-events:none}
+  .glow-a{width:420px; height:420px; top:-160px; left:50%; margin-left:-560px; background:rgba(109,124,255,.35)}
+  .glow-b{width:360px; height:360px; top:-120px; left:50%; margin-left:180px; background:rgba(156,124,255,.30)}
+
+  .fade-up{opacity:0; transform:translateY(14px); animation:fadeUp .6s ease forwards}
+  @keyframes fadeUp{to{opacity:1; transform:none}}
+
+  .badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:500;
+    padding:7px 14px; border-radius:999px; background:rgba(255,255,255,.03); border:1px solid var(--border);
+    color:var(--muted); margin-bottom:28px;
+  }
+  .badge .dot{width:6px; height:6px; border-radius:50%; background:var(--success); box-shadow:0 0 0 3px rgba(62,207,142,.18)}
+  h1{
+    font-family:var(--font-display); font-size:50px; line-height:1.1; letter-spacing:-.02em;
+    margin:0 0 18px; font-weight:750; animation-delay:.07s;
+  }
+  h1 .accent{
+    background:linear-gradient(100deg, var(--primary) 10%, var(--primary-2) 90%);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .lede{font-size:18px; color:var(--muted); max-width:560px; margin:0 auto 40px; animation-delay:.14s}
+
+  .panel{
+    max-width:520px; margin:0 auto; border-radius:20px; border:1px solid var(--border-strong);
+    background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 40%), rgba(17,17,22,.75);
+    backdrop-filter:blur(20px);
+    padding:22px; box-shadow:0 24px 70px -24px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.02) inset;
+    text-align:left; animation-delay:.2s;
+  }
+  label{display:block; font-size:12.5px; color:var(--muted); margin-bottom:6px; font-weight:500}
+  .field{margin-bottom:16px}
+  .field-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
+  .field-head label{margin-bottom:0}
+  .field-value{font-size:13px; color:var(--fg); font-weight:600}
+
+  .dropzone{
+    border:2px dashed var(--border-strong); border-radius:14px; padding:36px 20px; text-align:center;
+    cursor:pointer; transition:border-color .15s, background .15s; color:var(--muted);
+  }
+  .dropzone:hover, .dropzone.drag{border-color:var(--primary); background:rgba(109,124,255,.05)}
+  .dropzone svg{margin-bottom:10px; color:var(--muted-2)}
+  .dropzone p{margin:0; font-size:13.5px}
+  .dropzone strong{color:var(--fg)}
+
+  .preview-row{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+  .preview-thumb{width:60px; height:60px; border-radius:10px; object-fit:cover; border:1px solid var(--border); background:rgba(255,255,255,.03); flex-shrink:0}
+  .preview-info{min-width:0; flex:1}
+  .preview-info .fname{font-size:13.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .preview-info .fmeta{font-size:12px; color:var(--muted-2); margin-top:2px}
+  .preview-change{font-size:12.5px; color:var(--primary); cursor:pointer; background:none; border:0; font-family:inherit; padding:0; white-space:nowrap; flex-shrink:0}
+
+  .dim-row{display:flex; align-items:center; gap:10px}
+  .dim-field{flex:1}
+  .dim-field input[type=number]{
+    width:100%; background:rgba(255,255,255,.045); border:1px solid var(--border); border-radius:9px;
+    color:var(--fg); font-family:inherit; font-size:14px; padding:10px 11px; outline:none;
+    transition:border-color .15s;
+  }
+  .dim-field input:focus{border-color:rgba(109,124,255,.55)}
+  .dim-x{color:var(--muted-2); font-size:13px; padding-top:18px}
+  .ratio-toggle{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted); margin-top:10px; cursor:pointer; user-select:none}
+  .ratio-toggle input{accent-color:var(--primary); width:15px; height:15px; cursor:pointer}
+
+  .format-row{display:flex; gap:8px}
+  .format-opt{
+    flex:1; text-align:center; padding:9px 8px; border-radius:8px;
+    border:1px solid var(--border); font-size:13px; color:var(--muted); cursor:pointer;
+    user-select:none; transition:border-color .15s, color .15s, background .15s;
+  }
+  .format-opt.active{border-color:var(--primary); color:var(--fg); background:var(--primary-soft)}
+
+  input[type=range]{width:100%; accent-color:var(--primary); cursor:pointer}
+  .quality-row{overflow:hidden; max-height:70px; transition:max-height .2s, opacity .2s, margin .2s; opacity:1}
+  .quality-row.hidden{max-height:0; opacity:0; margin-bottom:0 !important}
+
+  .error-msg{color:var(--danger); font-size:13.5px; margin:2px 2px 12px; text-align:left}
+
+  .result{
+    max-width:520px; margin:20px auto 0; border:1px solid var(--border-strong); border-radius:16px;
+    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,0) 40%), var(--card);
+    padding:22px; display:none; text-align:center; opacity:0;
+  }
+  .result.show{display:block; animation:fadeUp .35s ease forwards}
+  .result-preview{
+    max-width:100%; max-height:280px; border-radius:12px; margin:0 auto 16px; display:block;
+    background:
+      linear-gradient(45deg, rgba(255,255,255,.06) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.06) 75%),
+      linear-gradient(45deg, rgba(255,255,255,.06) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.06) 75%);
+    background-size:16px 16px; background-position:0 0, 8px 8px;
+  }
+  .result-meta{font-size:13.5px; color:var(--muted); margin-bottom:16px}
+  .result-meta strong{color:var(--success)}
+  .result-actions{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--border); padding:28px 0}
+  .footer-row{text-align:center; font-size:13px; color:var(--muted-2)}
+  .footer-row a{text-decoration:none; color:var(--muted-2)}
+  .footer-row a:hover{color:var(--fg)}
+
+  #toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--card); border:1px solid var(--border-strong); color:var(--fg);
+    padding:12px 18px; border-radius:10px; font-size:13.5px; box-shadow:0 10px 30px rgba(0,0,0,.4);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+  }
+  #toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:640px){
+    h1{font-size:34px}
+    .glow-a, .glow-b{display:none}
+    .nav-toggle{display:flex}
+    .nav-links{
+      display:none; position:absolute; top:calc(100% + 1px); left:0; right:0; flex-direction:column; align-items:stretch;
+      gap:8px; padding:14px 20px 18px; background:rgba(11,11,15,.97); border-bottom:1px solid var(--border);
+      backdrop-filter:blur(14px); border-radius:0 0 14px 14px; box-shadow:0 16px 40px -12px rgba(0,0,0,.6);
+    }
+    .nav-links.open{display:flex}
+    .nav-links .btn{width:100%; justify-content:flex-start}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.9" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
+      </span>
+      Kısa Link
+    </a>
+    <button type="button" class="nav-toggle" onclick="toggleNav()" aria-label="Menüyü aç/kapat">
+      <svg id="navToggleIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 15a5 5 0 0 1 5-5h2M17 9a5 5 0 0 1-5 5h-2"/></svg>
+        Link Kısalt
+      </a>
+      <a href="qr.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h3M20 17.5V20"/></svg>
+        QR Kod Oluşturucu
+      </a>
+      <a href="parola.html" class="btn btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        Parola Oluştur
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="wrap">
+      <span class="badge fade-up"><span class="dot"></span> Ücretsiz, sunucuya yükleme yok</span>
+      <h1 class="fade-up">Görseli <span class="accent">Optimize Et.</span></h1>
+      <p class="lede fade-up">Boyutlandır, WebP / JPEG / PNG'e dönüştür — hepsi tarayıcında işlenir, hiçbir dosya sunucuya gitmez.</p>
+
+      <form class="panel fade-up" id="imgForm" onsubmit="return handleProcess(event)" novalidate>
+        <div id="dropzone" class="dropzone" onclick="document.getElementById('fileInput').click()">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <p><strong>Görseli buraya sürükleyin</strong><br>veya seçmek için tıklayın</p>
+          <input type="file" id="fileInput" accept="image/*" style="display:none" />
+        </div>
+
+        <div id="previewArea" style="display:none">
+          <div class="preview-row">
+            <img id="previewThumb" class="preview-thumb" alt="Önizleme" />
+            <div class="preview-info">
+              <div class="fname" id="fileName"></div>
+              <div class="fmeta" id="origInfo"></div>
+            </div>
+            <button type="button" class="preview-change" onclick="resetTool()">Değiştir</button>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label>Boyut (piksel)</label></div>
+            <div class="dim-row">
+              <div class="dim-field">
+                <input type="number" id="widthInput" min="1" max="8000" />
+              </div>
+              <span class="dim-x">×</span>
+              <div class="dim-field">
+                <input type="number" id="heightInput" min="1" max="8000" />
+              </div>
+            </div>
+            <label class="ratio-toggle">
+              <input type="checkbox" id="keepRatio" checked />
+              En-boy oranını koru
+            </label>
+          </div>
+
+          <div class="field">
+            <label>Çıktı formatı</label>
+            <div class="format-row" id="formatRow">
+              <div class="format-opt active" data-format="webp">WebP</div>
+              <div class="format-opt" data-format="jpeg">JPEG</div>
+              <div class="format-opt" data-format="png">PNG</div>
+            </div>
+          </div>
+
+          <div class="field quality-row" id="qualityRow">
+            <div class="field-head">
+              <label for="qualitySlider">Kalite</label>
+              <span class="field-value" id="qualityValue">%80</span>
+            </div>
+            <input type="range" id="qualitySlider" min="10" max="100" value="80" />
+          </div>
+
+          <p class="error-msg" id="errorMsg"></p>
+          <button type="submit" class="btn btn-primary btn-block" id="processBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            <span id="processBtnLabel">Görseli İşle</span>
+          </button>
+        </div>
+        <p class="error-msg" id="pickErrorMsg" style="display:none"></p>
+      </form>
+
+      <div class="result" id="resultCard">
+        <img class="result-preview" id="resultImg" alt="İşlenmiş görsel" />
+        <div class="result-meta" id="resultMeta"></div>
+        <div class="result-actions">
+          <button type="button" class="btn btn-primary" onclick="downloadResult()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16"/></svg>
+            İndir
+          </button>
+          <button type="button" class="btn btn-outline" onclick="resetTool()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
+            Başka Görsel
+          </button>
+        </div>
+      </div>
+
+      <canvas id="workCanvas" style="display:none"></canvas>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    Görseller tarayıcınızda işlenir, hiçbir sunucuya yüklenmez veya saklanmaz.
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.classList.remove('show'); }, 2200);
+  }
+
+  function toggleNav(){
+    var links = document.getElementById('navLinks');
+    var icon = document.getElementById('navToggleIcon');
+    var isOpen = links.classList.toggle('open');
+    icon.innerHTML = isOpen ? '<path d="M18 6 6 18M6 6l12 12"/>' : '<path d="M3 6h18M3 12h18M3 18h18"/>';
+  }
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 640){
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('navToggleIcon').innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"/>';
+    }
+  });
+
+  var MAX_FILE_SIZE = 25 * 1024 * 1024;
+  var MAX_DIMENSION = 8000;
+
+  var originalFile = null;
+  var originalImg = null;
+  var aspectRatio = 1;
+  var currentFormat = 'webp';
+  var processedBlob = null;
+  var processedUrl = null;
+
+  function humanFileSize(bytes){
+    if(bytes < 1024) return bytes + ' B';
+    var units = ['KB','MB','GB'];
+    var i = -1;
+    do{ bytes /= 1024; i++; }while(bytes >= 1024 && i < units.length - 1);
+    return bytes.toFixed(1) + ' ' + units[i];
+  }
+
+  var dropzone = document.getElementById('dropzone');
+  var fileInput = document.getElementById('fileInput');
+
+  fileInput.addEventListener('change', function(){
+    if(fileInput.files && fileInput.files[0]) handleFileSelect(fileInput.files[0]);
+  });
+
+  dropzone.addEventListener('dragover', function(e){
+    e.preventDefault();
+    dropzone.classList.add('drag');
+  });
+  dropzone.addEventListener('dragleave', function(){
+    dropzone.classList.remove('drag');
+  });
+  dropzone.addEventListener('drop', function(e){
+    e.preventDefault();
+    dropzone.classList.remove('drag');
+    if(e.dataTransfer.files && e.dataTransfer.files[0]) handleFileSelect(e.dataTransfer.files[0]);
+  });
+
+  function handleFileSelect(file){
+    var pickErr = document.getElementById('pickErrorMsg');
+    pickErr.style.display = 'none';
+    pickErr.textContent = '';
+
+    if(!file.type || file.type.indexOf('image/') !== 0){
+      pickErr.textContent = 'Lütfen bir görsel dosyası seçin.';
+      pickErr.style.display = 'block';
+      return;
+    }
+    if(file.size > MAX_FILE_SIZE){
+      pickErr.textContent = 'Dosya çok büyük (en fazla 25MB olmalı).';
+      pickErr.style.display = 'block';
+      return;
+    }
+
+    var reader = new FileReader();
+    reader.onload = function(e){
+      var img = new Image();
+      img.onload = function(){
+        originalFile = file;
+        originalImg = img;
+        aspectRatio = img.width / img.height;
+
+        document.getElementById('widthInput').value = img.width;
+        document.getElementById('heightInput').value = img.height;
+        document.getElementById('previewThumb').src = e.target.result;
+        document.getElementById('fileName').textContent = file.name;
+        document.getElementById('origInfo').textContent = img.width + '×' + img.height + ' — ' + humanFileSize(file.size);
+
+        document.getElementById('dropzone').style.display = 'none';
+        document.getElementById('previewArea').style.display = 'block';
+        document.getElementById('resultCard').classList.remove('show');
+      };
+      img.onerror = function(){
+        pickErr.textContent = 'Görsel yüklenemedi — dosya bozuk olabilir.';
+        pickErr.style.display = 'block';
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  var widthInput = document.getElementById('widthInput');
+  var heightInput = document.getElementById('heightInput');
+  var keepRatio = document.getElementById('keepRatio');
+
+  widthInput.addEventListener('input', function(){
+    if(keepRatio.checked && widthInput.value){
+      heightInput.value = Math.max(1, Math.round(widthInput.value / aspectRatio));
+    }
+  });
+  heightInput.addEventListener('input', function(){
+    if(keepRatio.checked && heightInput.value){
+      widthInput.value = Math.max(1, Math.round(heightInput.value * aspectRatio));
+    }
+  });
+
+  document.getElementById('formatRow').addEventListener('click', function(e){
+    var opt = e.target.closest('.format-opt');
+    if(!opt) return;
+    document.querySelectorAll('.format-opt').forEach(function(el){ el.classList.remove('active'); });
+    opt.classList.add('active');
+    currentFormat = opt.dataset.format;
+    document.getElementById('qualityRow').classList.toggle('hidden', currentFormat === 'png');
+  });
+
+  var qualitySlider = document.getElementById('qualitySlider');
+  qualitySlider.addEventListener('input', function(){
+    document.getElementById('qualityValue').textContent = '%' + qualitySlider.value;
+  });
+
+  function handleProcess(e){
+    e.preventDefault();
+    var errorEl = document.getElementById('errorMsg');
+    errorEl.textContent = '';
+
+    if(!originalImg){
+      errorEl.textContent = 'Önce bir görsel seçin.';
+      return false;
+    }
+
+    var width = parseInt(widthInput.value, 10);
+    var height = parseInt(heightInput.value, 10);
+    if(!width || !height || width < 1 || height < 1){
+      errorEl.textContent = 'Geçerli bir genişlik ve yükseklik girin.';
+      return false;
+    }
+    if(width > MAX_DIMENSION || height > MAX_DIMENSION){
+      errorEl.textContent = 'En fazla ' + MAX_DIMENSION + '×' + MAX_DIMENSION + ' piksel desteklenir.';
+      return false;
+    }
+
+    var canvas = document.getElementById('workCanvas');
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, width, height);
+    if(currentFormat === 'jpeg'){
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, width, height);
+    }
+    ctx.drawImage(originalImg, 0, 0, width, height);
+
+    var mime = currentFormat === 'png' ? 'image/png' : (currentFormat === 'webp' ? 'image/webp' : 'image/jpeg');
+    var quality = currentFormat === 'png' ? undefined : (parseInt(qualitySlider.value, 10) / 100);
+
+    canvas.toBlob(function(blob){
+      if(!blob){
+        errorEl.textContent = 'Bu tarayıcı seçilen formatı desteklemiyor.';
+        return;
+      }
+      if(processedUrl) URL.revokeObjectURL(processedUrl);
+      processedBlob = blob;
+      processedUrl = URL.createObjectURL(blob);
+
+      document.getElementById('resultImg').src = processedUrl;
+
+      var metaText = width + '×' + height + ' — ' + humanFileSize(blob.size);
+      if(originalFile.size > 0){
+        var pct = Math.round((1 - blob.size / originalFile.size) * 100);
+        if(pct > 0) metaText += ' — <strong>%' + pct + ' daha küçük</strong>';
+        else if(pct < 0) metaText += ' — %' + Math.abs(pct) + ' daha büyük';
+      }
+      document.getElementById('resultMeta').innerHTML = metaText;
+      document.getElementById('resultCard').classList.add('show');
+      toast('Görsel işlendi');
+    }, mime, quality);
+
+    return false;
+  }
+
+  function downloadResult(){
+    if(!processedBlob) return;
+    var ext = currentFormat === 'jpeg' ? 'jpg' : currentFormat;
+    var a = document.createElement('a');
+    a.href = processedUrl;
+    a.download = 'gorsel.' + ext;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    toast('İndiriliyor…');
+  }
+
+  function resetTool(){
+    originalFile = null;
+    originalImg = null;
+    if(processedUrl) URL.revokeObjectURL(processedUrl);
+    processedBlob = null;
+    processedUrl = null;
+
+    fileInput.value = '';
+    document.getElementById('dropzone').style.display = 'block';
+    document.getElementById('previewArea').style.display = 'none';
+    document.getElementById('resultCard').classList.remove('show');
+    document.getElementById('errorMsg').textContent = '';
+    document.getElementById('pickErrorMsg').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
